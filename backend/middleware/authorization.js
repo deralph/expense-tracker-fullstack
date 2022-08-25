@@ -10,7 +10,7 @@ const authMiiddleware = (req, res, next) => {
 
   console.log(token);
 
-  if (!token) {
+  if (!token || token === "user is out") {
     throw new Unauthorized("no token available");
   }
   decoded = jwt.verify(token, process.env.JWT_SECRET);

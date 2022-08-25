@@ -7,7 +7,9 @@ const GetAllExpenses = async (req, res) => {
   if (!expenses) {
     return res.json({ msg: "no expense found" });
   }
-  res.status(StatusCodes.OK).json({ expenses, count: expenses.length });
+  res
+    .status(StatusCodes.OK)
+    .json({ expenses, count: expenses.length, user: username });
 };
 const createExpense = async (req, res) => {
   req.body.createdBy = req.user.userId;
