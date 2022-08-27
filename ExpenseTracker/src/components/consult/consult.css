@@ -34,9 +34,9 @@
   font-family: sans-serif;
 }
 .form {
-  display: grid;
-  place-content: center;
-  height: 150px;
+  /* display: grid; */
+  /* place-content: center; */
+  /* height: 150px; */
   background: #eee;
   padding: 30px;
   width: 300px;
@@ -49,9 +49,10 @@
   outline: none;
   width: 100%;
   padding: 5px;
-  /* margin: 0 0 15px 0; */
+  /* margin: 10px 0; */
+  margin: 0 0 15px 0;
 }
-.form .btn {
+.form .btn-con {
   padding: 10px 20px;
   border: none;
   background: #7733ff;
@@ -92,7 +93,7 @@
     height: 600px;
     width: 600px;
   }
-  .form .btn {
+  .form .btn-con {
     padding: 20px 80px;
     font-size: 40px;
     margin-top: 50px;

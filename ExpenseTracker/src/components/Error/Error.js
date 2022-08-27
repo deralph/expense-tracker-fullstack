@@ -4,7 +4,7 @@ import "./Error.css";
 const Error = () => {
   return (
     <section className="error">
-      <img src="images/error.png" alt="404 error" />
+      <img src="/images/error.png" alt="404 error" />
       <div className="error-cont">
         <h3>404 - Page Not Found</h3>
         <p>

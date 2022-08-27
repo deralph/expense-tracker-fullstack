@@ -10,6 +10,7 @@ import SingleExpense from "./pages/singleExpense";
 // import SingleExpense from "./components/expenses/singleExpense";
 import Expense from "./pages/expense";
 import Dashboard from "./pages/dashboard";
+import Edit from "./pages/editSingleExpense";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/consultation" element={<Consultation />} />
         <Route path="/expense" element={<Expense />} />
         <Route path="/expense/:id" element={<SingleExpense />} />
+        <Route path="/expense/:id/edit" element={<Edit />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<Error />} />
       </Routes>

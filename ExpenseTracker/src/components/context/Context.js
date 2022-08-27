@@ -5,16 +5,6 @@ const AppProvider = React.createContext();
 const Context = ({ children }) => {
   const [currentuser, setcurrentuser] = useState("");
 
-  const [form, setForm] = useState({
-    productName: "",
-    price: "",
-    date: "",
-    month: new Date().toLocaleDateString("en-us", { month: "long" }),
-    productNo: "",
-    category: "",
-    description: "",
-  });
-
   const [signIn, setSignIn] = useState(false);
   const [sidebar, setSidebar] = useState(false);
   const reduceFunction = (group) => {
@@ -31,8 +21,6 @@ const Context = ({ children }) => {
   return (
     <AppProvider.Provider
       value={{
-        form,
-        setForm,
         signIn,
         setSignIn,
         sidebar,

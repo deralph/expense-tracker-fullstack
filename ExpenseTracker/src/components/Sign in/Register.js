@@ -53,6 +53,7 @@ const Register = () => {
 
         console.log(data);
         setMsg("submitted sucessfully");
+        navigate("/dashboard");
       } catch (error) {
         console.log(error);
         console.log("unable to submit user");

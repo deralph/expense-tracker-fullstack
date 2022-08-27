@@ -77,9 +77,9 @@
   width: 30px;
 }
 .single-exp {
-  margin: 20px;
+  /* margin: 20px; */
   border: 5px solid #96f;
-  padding: 20px;
+  /* padding: 20px; */
   font-family: sans-serif;
   width: 100%;
   max-width: 500px;
@@ -102,12 +102,48 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
   background-color: rgba(153, 102, 255, 0.3);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='%23b47cec' fill-opacity='0.3'%3E%3Cpolygon fill-rule='evenodd' points='8 4 12 6 8 8 6 12 4 8 0 6 4 4 6 0 8 4'/%3E%3C/g%3E%3C/svg%3E");
 }
+.edit-icon,
+.delete-icon {
+  font-size: 40px;
+}
+.icons-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 20px 10px;
+}
 
+.delete {
+  max-width: 500px;
+  width: 90%;
+  /* height: 300px; */
+  z-index: 100;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.del-btns {
+  margin: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+.del-btns button {
+  padding: 10px 40px;
+  /* background: rgba(250, 4, 4, 0.7); */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-left: 30px;
+}
 @media (min-width: 1800px) {
   .expenses {
     margin: 70px auto !important;

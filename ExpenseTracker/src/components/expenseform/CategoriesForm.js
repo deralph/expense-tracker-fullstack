@@ -4,15 +4,33 @@ import { useNavigate } from "react-router-dom";
 import Back from "../../extras/Back";
 import axios from "../../extras/axios";
 
-const ExpenseForm = ({ back }) => {
+const ExpenseForm = ({
+  _id,
+  category,
+  price,
+  productName,
+  productNo,
+  date,
+  description,
+  back,
+}) => {
+  console.log(_id, category, price, productName, productNo, date, description);
   const timing = new Date().toLocaleDateString("en-us", {
     year: "numeric",
     weekday: "long",
     day: "numeric",
     month: "short",
   });
-  const { form, setForm, currentuser, addDoc, colRef, serverTimestamp } =
-    useGlobal();
+
+  const [form, setForm] = useState({
+    productName: productName || "",
+    price: price || "",
+    date: date || "",
+    productNo: productNo || "",
+    category: category || "",
+    description: description || "",
+  });
+
   const Navigate = useNavigate();
   const focus = (e) => {
     e.target.type = "date";
@@ -43,7 +61,7 @@ const ExpenseForm = ({ back }) => {
       setShowAlert(true);
       setAlert(true);
       setMsg("please enter all input");
-    } else if (isNaN(form.price)) {
+    } else if (form.price < 1) {
       setAlert(true);
       setMsg("Enter correct inputs");
       setShowAlert(true);
@@ -75,7 +93,7 @@ const ExpenseForm = ({ back }) => {
         setMsg("submitted sucessfully");
 
         console.log("added");
-        //   Navigate("/dashboard");
+        Navigate("/dashboard");
         setForm({
           productName: "",
           price: "",
@@ -83,13 +101,32 @@ const ExpenseForm = ({ back }) => {
           productNo: "",
           category: "",
         });
+        setLoading(false);
       } catch (error) {
         setAlert(true);
-        console.log(error);
         setMsg("unable to submit expenses");
+        console.log(error);
+        setLoading(false);
       }
     }
     console.log(msg);
+  };
+
+  const handleEdit = async () => {
+    try {
+      setLoading(true);
+      axios.patch(`expenses/${_id}`, form);
+      console.log("patched");
+      setAlert(false);
+      setMsg("updated sucessfully");
+      setLoading(false);
+      Navigate("/dashboard");
+    } catch (error) {
+      setAlert(true);
+      setMsg("unable to update expense");
+      console.log(error);
+      setLoading(false);
+    }
   };
 
   return (
@@ -101,12 +138,12 @@ const ExpenseForm = ({ back }) => {
       <div className="semi-bg" />
       <article className="sign-article">
         <form action="" className="sign">
-          <h3>Enter product details</h3>
+          <h3>Enter expense details</h3>
           {showAlert && (
             <p className={`alert ${alert ? "fail" : "sucess"}`}>{msg}</p>
           )}
           <input
-            type="email"
+            type="text"
             name="productName"
             id="productName"
             value={form.productName}
@@ -115,7 +152,7 @@ const ExpenseForm = ({ back }) => {
             required
           />
           <input
-            type="email"
+            type="number"
             value={form.price}
             name="price"
             id="price"
@@ -149,16 +186,16 @@ const ExpenseForm = ({ back }) => {
             onChange={handleForm}
           >
             <option value="">Select Categories</option>
-            <option value="cloth">Clothes</option>
-            <option value="accesories">Accesories</option>
-            <option value="grocery">Grocery</option>
-            <option value="drinks">Drinks</option>
-            <option value="foods">Foods</option>
-            <option value="electric">Electric</option>
-            <option value="home">Home Expenses</option>
-            <option value="transport">Transport</option>
-            <option value="micellenous">Micellenous</option>
-            <option value="others">Others</option>
+            <option value="Clothes">Clothes</option>
+            <option value="Accesories">Accesories</option>
+            <option value="Grocery">Grocery</option>
+            <option value="Drinks">Drinks</option>
+            <option value="Foods">Foods</option>
+            <option value="Electric">Electric</option>
+            <option value="Home">Home Expenses</option>
+            <option value="Transport">Transport</option>
+            <option value="Micellenous">Micellenous</option>
+            <option value="Others">Others</option>
           </select>
           <textarea
             name="description"
@@ -167,15 +204,20 @@ const ExpenseForm = ({ back }) => {
             onChange={handleForm}
             placeholder="Description"
           ></textarea>
-          <button onClick={handleSubmit} disabled={loading}>
-            Submit
-          </button>
+          {_id ? (
+            <button onClick={handleEdit}>Edit</button>
+          ) : (
+            <button onClick={handleSubmit} disabled={loading}>
+              Submit
+            </button>
+          )}
         </form>
         <p className="info-p">
           Kindly note that all prices entered should be in NAIRA{" "}
-          <img src="images/naira.png" alt="naira" className="naira" />
+          <img src="/images/naira.png" alt="naira" className="naira" />
         </p>
       </article>
+      <p>{form.category}</p>
     </section>
   );
 };

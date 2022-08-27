@@ -16,7 +16,7 @@ const Expenses = ({ data, type, seeall }) => {
         </div>
         <div className="expenses-btn">
           {seeall && (
-            <Link to="allExpense">
+            <Link to="/expense">
               <button className="btns">See All</button>
             </Link>
           )}

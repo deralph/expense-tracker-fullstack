@@ -11,7 +11,7 @@ const Welcome = () => {
           more reliable way with no worries
         </p>
         <div className="btn">
-          <Link to="/expenseForm">
+          <Link to="/expense-form">
             <button>get started</button>
           </Link>
           <Link to="/categories">

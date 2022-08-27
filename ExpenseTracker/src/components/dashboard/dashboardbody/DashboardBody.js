@@ -9,7 +9,6 @@ import quotes, {
   useIcons,
 } from "../../../extras/quotesDB";
 import Quote from "./Quote";
-// import { sets, useIcons } from "../../../extras/quotesDB";
 import Incategories from "../../categories/Incategories";
 import { Link, useNavigate } from "react-router-dom";
 import { RiEqualizerLine } from "react-icons/ri";
@@ -19,25 +18,26 @@ import Loader from "../../loading/Loader";
 const DashboardBody = () => {
   const navigate = useNavigate();
   const [result, setResult] = useState([]);
-  const [loading, setloading] = useState();
+  const [user, setuser] = useState();
   const [problem, setProblem] = useState();
 
   const fetcher = useCallback(async () => {
     try {
       const { data } = await axios.get("expenses");
       setResult(data.expenses);
+      setuser(data.user);
       console.log("in");
     } catch (error) {
       console.log(error);
       if (error.response.status === 401) navigate("/signin");
-      setloading(false);
+      // setloading(false);
       setProblem(true);
     }
   }, [navigate]);
   useEffect(() => {
-    setloading(true);
+    // setloading(true);
     fetcher();
-    setloading(false);
+    // setloading(false);
   }, [fetcher]);
   const { sidebar, setSidebar, reduceFunction } = useGlobal();
   const [presentQuote, setPresentQuote] = useState(0);
@@ -85,6 +85,7 @@ const DashboardBody = () => {
     }, 0);
     return cummulative;
   };
+  // console.log(sorted_percent);
 
   const Cummulative_percent_Array = [];
   const Cummulative_percent = () => {
@@ -94,10 +95,11 @@ const DashboardBody = () => {
         type: percentage[i].type,
       };
       Cummulative_percent_Array.push(returned_cummulative_array);
+      // console.log(percentage[i].type);
     }
   };
-
   Cummulative_percent();
+  // console.log(Cummulative_percent_Array);
   const Real_Gradient_color = [];
   const Gradient_color = () => {
     for (let i = 0; i < Cummulative_percent_Array.length; i++) {
@@ -110,11 +112,14 @@ const DashboardBody = () => {
         Category_colors[Cummulative_percent_Array[i].type]
       } ${j}% ${f}`;
       Real_Gradient_color.push(returned_Gradient_color);
+      // console.log(Category_colors[Cummulative_percent_Array[i].type]);
     }
   };
   Gradient_color();
+  // console.log(Real_Gradient_color);
   const joined_Real_Gradient_color = `${Real_Gradient_color.join(" ")}`;
   const Original_Gradient_color = `linear-gradient(90deg,${joined_Real_Gradient_color})`;
+  // console.log(Original_Gradient_color);
   const top4 = sorted_percent.slice(0, 4);
   let f;
   result.length < 10 ? (f = 0) : (f = result.length - 10);
@@ -137,7 +142,7 @@ const DashboardBody = () => {
 
   return (
     <section className={sidebar ? "dashboard-body overflow" : "dashboard-body"}>
-      {loading ? (
+      {!result ? (
         <Loader />
       ) : (
         <>
@@ -146,6 +151,7 @@ const DashboardBody = () => {
             className="dash-top1"
             onClick={() => setSidebar(!sidebar)}
           />
+          <p className="user">welcome {user}</p>
           <Quote
             quote={quotes[presentQuote].quote}
             author={quotes[presentQuote].author}
@@ -163,7 +169,7 @@ const DashboardBody = () => {
                 </span>{" "}
                 spent
               </p>
-              <Link to="allExpense">
+              <Link to="/expense">
                 <button>See List</button>
               </Link>
             </div>

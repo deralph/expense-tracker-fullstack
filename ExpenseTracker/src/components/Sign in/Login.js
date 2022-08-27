@@ -42,7 +42,7 @@ const Login = () => {
         setPass("");
         setEmail("");
         setPass("");
-        // navigate("/dashboard");
+        navigate("/dashboard");
       } catch (error) {
         console.log(error);
         console.log("unable to submit user");

@@ -31,7 +31,7 @@ const Expense = ({ _id, productName, price, category, productNo, date }) => {
         </div>
         <div className="exp">
           <p className="exp-price">
-            <img src="images/naira.png" alt="naira" className="naira" />
+            <img src="/images/naira.png" alt="naira" className="naira" />
             {price * productNo}
           </p>
           <p className="exp-date">{category}</p>

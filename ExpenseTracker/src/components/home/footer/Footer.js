@@ -7,8 +7,13 @@ const Footer = () => {
       <div className="foot">
         <h3>ExpenseTracked</h3>
         <ul>
-          <li>about us</li>
-          <li>contact us</li>
+          <li>
+            {" "}
+            <a href="#about">about us</a>
+          </li>
+          <li>
+            <a href="#contact">contact us</a>
+          </li>
         </ul>
       </div>
       <p>copyright &copy; ExpenseTracked 2020</p>

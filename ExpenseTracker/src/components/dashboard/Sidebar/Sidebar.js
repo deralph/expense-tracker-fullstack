@@ -27,17 +27,17 @@ const Sidebar = ({
         <>
           <ul className="side-basic">
             <Logo show={true} style={{ marginBottom: "30px" }} />
-            <Link to="categories">
+            <Link to="/categories">
               {" "}
               <li>View Categories</li>
             </Link>
-            <Link to="allExpense">
+            <Link to="/expense">
               <li>All Expenses</li>
             </Link>
-            <Link to="expenseForm">
+            <Link to="/expense-form">
               <li>Add Expenses</li>
             </Link>
-            <Link to="consultation">
+            <Link to="/consultation">
               <li>Book Consultation</li>
             </Link>
             <a href={`mailto:deralph73@gmail.com?subject=${subject}`}>

@@ -484,16 +484,16 @@ const quotesDB = [
   },
 ];
 export const Category_colors = {
-  cloth: "#993377",
-  grocery: "skyblue",
-  drinks: "rgba(165, 42, 42, 0.514)",
-  electric: "blueviolet",
-  home: "yellowgreen",
-  transport: "grey",
-  micellenous: "yellow",
-  foods: "peachpuff",
-  others: "rgb(255, 0, 157)",
-  accesories: "burlywood",
+  Clothes: "#993377",
+  Grocery: "skyblue",
+  Drinks: "rgba(165, 42, 42, 0.514)",
+  Electric: "blueviolet",
+  Home: "yellowgreen",
+  Transport: "grey",
+  Micellenous: "yellow",
+  Foods: "peachpuff",
+  Others: "rgb(255, 0, 157)",
+  Accesories: "burlywood",
 };
 
 export const sets = (set, type) => [

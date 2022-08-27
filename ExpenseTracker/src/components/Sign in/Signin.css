@@ -123,6 +123,9 @@
   outline: none;
   cursor: pointer;
 }
+.sign button:disabled {
+  background: #a091be;
+}
 .categoryForm {
   display: grid;
   place-items: center;

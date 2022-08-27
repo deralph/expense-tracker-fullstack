@@ -49,7 +49,7 @@ const Consult = ({ route }) => {
   };
 
   return (
-    <section className="consult">
+    <section className="consult" id="contact">
       {/* {route && <Back />} */}
       <h3>Consult Us</h3>
       <div className="consult-1">
@@ -77,16 +77,18 @@ const Consult = ({ route }) => {
               onChange={(e) => setName(e.target.value)}
             />
             <input
-              type="emmail"
+              type="email"
               name="email"
               id="email"
               value={email}
               placeholder="Your Email"
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button className="btn" disabled={loading} type="submit">
-              send now
-            </button>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button className="btn-con" disabled={loading} type="submit">
+                send now
+              </button>
+            </div>
           </form>
         </div>
       </div>

@@ -6,14 +6,14 @@ const Incategories = ({ title, Icon, color, percent, percenta }) => {
   const Red = Icon;
   return (
     <div className="cate">
-      <Link to="/ExpenseForm">
+      <Link to="/expense-form">
         <Red className="caticon" style={{ background: `${color}` }} />
         <p>{title}</p>
         {percent && (
           <>
             <p style={{ display: "flex", alignItems: "center" }}>
               price :{" "}
-              <img src="images/naira.png" alt="naira" className="naira" />
+              <img src="/images/naira.png" alt="naira" className="naira" />
               <span style={{ color: "#0033ff" }}> {percent}</span>
             </p>
             <p>
