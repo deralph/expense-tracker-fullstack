@@ -23,7 +23,7 @@ const Context = ({ children }) => {
       setloading(false);
       setprobs(true);
     }
-  }, []);
+  }, [setloading, setuser, setprobs]);
   useEffect(() => {
     fetcher();
   }, [fetcher]);
