@@ -3,11 +3,11 @@ import DashboardBody from "./dashboardbody/DashboardBody";
 import Sidebar from "./Sidebar/Sidebar";
 import "./Dashboard.css";
 
-const Dashboard = () => {
+const Dashboard = ({ result, user }) => {
   return (
     <section className="dashboard">
       <Sidebar />
-      <DashboardBody />
+      <DashboardBody result={result} user={user} />
     </section>
   );
 };

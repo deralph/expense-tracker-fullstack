@@ -92,7 +92,8 @@
   color: red;
   font-family: sans-serif;
 }
-.sign .alert {
+.sign .alert,
+.alert {
   font-size: 13px;
   padding: 5px;
   text-align: center;
@@ -103,7 +104,8 @@
   color: green;
   border: 2px solid green;
 }
-.sign .fail {
+.sign .fail,
+.fail {
   color: red;
   border: 2px solid red;
 }

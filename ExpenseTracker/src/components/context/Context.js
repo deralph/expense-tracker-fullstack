@@ -1,22 +1,35 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
+import axios from "../../extras/axios";
 
 const AppProvider = React.createContext();
 
 const Context = ({ children }) => {
-  const [currentuser, setcurrentuser] = useState("");
+  // const [currentuser, setcurrentuser] = useState("");
+
+  const [loading, setloading] = useState(true);
+  const [user, setuser] = useState();
+  const [probs, setprobs] = useState();
+
+  const fetcher = useCallback(async () => {
+    try {
+      const { data } = await axios.get("expenses");
+      setloading(true);
+      setuser(data.user);
+      setloading(false);
+      // console.log("in");
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 401) setloading(false);
+      setloading(false);
+      setprobs(true);
+    }
+  }, []);
+  useEffect(() => {
+    fetcher();
+  }, [fetcher]);
 
   const [signIn, setSignIn] = useState(false);
   const [sidebar, setSidebar] = useState(false);
-  const reduceFunction = (group) => {
-    const percent = group.reduce((acc, real) => {
-      const { productNo, price } = real;
-      const productNum = parseInt(productNo);
-      const productPrice = parseInt(price);
-      const realTotal = productNum * productPrice;
-      return acc + realTotal;
-    }, 0);
-    return percent;
-  };
 
   return (
     <AppProvider.Provider
@@ -25,7 +38,8 @@ const Context = ({ children }) => {
         setSignIn,
         sidebar,
         setSidebar,
-        reduceFunction,
+        loading,
+        user,
       }}
     >
       {children}

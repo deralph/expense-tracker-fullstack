@@ -12,7 +12,6 @@ const ExpenseForm = ({
   productNo,
   date,
   description,
-  back,
 }) => {
   console.log(_id, category, price, productName, productNo, date, description);
   const timing = new Date().toLocaleDateString("en-us", {
@@ -134,7 +133,7 @@ const ExpenseForm = ({
       className="signin"
       style={{ padding: "50px 0 100px", minHeight: "800px" }}
     >
-      {back && <Back />}
+      <Back />
       <div className="semi-bg" />
       <article className="sign-article">
         <form action="" className="sign">

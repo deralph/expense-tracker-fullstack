@@ -1,6 +1,6 @@
 import React from "react";
 import Incategories from "./Incategories";
-import { useIcons } from "../../extras/quotesDB";
+import useIcons from "../../extras/useicon";
 import Back from "../../extras/Back";
 
 const Categories = () => {

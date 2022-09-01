@@ -7,7 +7,7 @@ import Categories from "./pages/Categories";
 import ExpenseForm from "./pages/expenseForm";
 import Consultation from "./pages/consultation";
 import SingleExpense from "./pages/singleExpense";
-// import SingleExpense from "./components/expenses/singleExpense";
+import Problem from "./extras/problem";
 import Expense from "./pages/expense";
 import Dashboard from "./pages/dashboard";
 import Edit from "./pages/editSingleExpense";
@@ -27,6 +27,7 @@ function App() {
         <Route path="/expense/:id/edit" element={<Edit />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<Error />} />
+        <Route path="prob" element={<Problem />} />
       </Routes>
     </BrowserRouter>
   );

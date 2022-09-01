@@ -1,34 +1,23 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useIcons } from "../../extras/quotesDB";
+// import { useIcons } from "../../extras/useicon";
 // import useFetch from "../../extras/useFetch";
 import { MdOutlineModeEditOutline, MdDeleteForever } from "react-icons/md";
 import axios from "../../extras/axios";
 import "./expenses.css";
 import Loader from "../loading/Loader";
 import Delete from "./delete";
+import Back from "../../extras/Back";
 
 const SingleExpense = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [del, setDelete] = useState(false);
-  // const [icons, setIcons] = useState(useIcons);
-  // const [color, setColor] = useState();
   const [result, setResult] = useState([]);
   const [loading, setloading] = useState(true);
   const [problem, setProblem] = useState();
 
   const fetcher = useCallback(async () => {
-    // axios
-    //   .get(`expenses/${id}`)
-    //   .then((res) => setResult(res.data.expense))
-    //   .catch((err) => {
-    //     console.log(err);
-
-    //     if (err.response.status === 401) navigate("/signin");
-    //     setloading(false);
-    //     setProblem(true);
-    //   });
     try {
       console.log("finally in fetcher");
       const { data } = await axios.get(`expenses/${id}`);
@@ -47,11 +36,6 @@ const SingleExpense = () => {
     fetcher();
     setloading(false);
   }, [fetcher]);
-  // useEffect(() => {
-  //   if (!del) {
-  //     window.onclick = () => setDelete(false);
-  //   }
-  // });
 
   console.log(result);
   const { _id, category, price, productName, productNo, date, description } =
@@ -73,12 +57,10 @@ const SingleExpense = () => {
       </h1>
     );
   }
-  // if (del) {
-  //   return <Delete id={_id} setDelete={setDelete} />;
-  // }
 
   return (
     <div className="single-main">
+      <Back />
       <div>
         {!result ? (
           <Loader />

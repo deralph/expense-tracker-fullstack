@@ -3,43 +3,17 @@ import { useGlobal } from "../../context/Context";
 import Expenses from "../../expenses/Expenses";
 import Dash from "./Dash";
 import "./dashboardBody.css";
-import quotes, {
-  Category_colors,
-  sets,
-  useIcons,
-} from "../../../extras/quotesDB";
+import quotes from "../../../extras/quotesDB";
+import { sets, Category_colors } from "../../../extras/functions";
+import useIcons from "../../../extras/useicon";
 import Quote from "./Quote";
 import Incategories from "../../categories/Incategories";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { RiEqualizerLine } from "react-icons/ri";
-import axios from "../../../extras/axios";
-import Loader from "../../loading/Loader";
+import { reduceFunction } from "../../../extras/functions";
 
-const DashboardBody = () => {
-  const navigate = useNavigate();
-  const [result, setResult] = useState([]);
-  const [user, setuser] = useState();
-  const [problem, setProblem] = useState();
-
-  const fetcher = useCallback(async () => {
-    try {
-      const { data } = await axios.get("expenses");
-      setResult(data.expenses);
-      setuser(data.user);
-      console.log("in");
-    } catch (error) {
-      console.log(error);
-      if (error.response.status === 401) navigate("/signin");
-      // setloading(false);
-      setProblem(true);
-    }
-  }, [navigate]);
-  useEffect(() => {
-    // setloading(true);
-    fetcher();
-    // setloading(false);
-  }, [fetcher]);
-  const { sidebar, setSidebar, reduceFunction } = useGlobal();
+const DashboardBody = ({ result, user }) => {
+  const { sidebar, setSidebar } = useGlobal();
   const [presentQuote, setPresentQuote] = useState(0);
 
   const randomNum = useCallback(() => {
@@ -132,77 +106,65 @@ const DashboardBody = () => {
     });
   });
 
-  if (problem) {
-    return (
-      <h1 style={{ display: "grid", placeContent: "center", height: "100vh" }}>
-        SOMETHING WENT WRONG
-      </h1>
-    );
-  }
-
   return (
     <section className={sidebar ? "dashboard-body overflow" : "dashboard-body"}>
-      {!result ? (
-        <Loader />
-      ) : (
-        <>
-          {" "}
-          <RiEqualizerLine
-            className="dash-top1"
-            onClick={() => setSidebar(!sidebar)}
-          />
-          <p className="user">welcome {user}</p>
-          <Quote
-            quote={quotes[presentQuote].quote}
-            author={quotes[presentQuote].author}
-          />
-          <article className="total-category">
-            <div className="total-card">
-              <p>
-                <span>
-                  <img
-                    src="images/naira.png"
-                    alt="naira symbol"
-                    className="naira"
+      <>
+        {" "}
+        <RiEqualizerLine
+          className="dash-top1"
+          onClick={() => setSidebar(!sidebar)}
+        />
+        <p className="user">welcome {user}</p>
+        <Quote
+          quote={quotes[presentQuote].quote}
+          author={quotes[presentQuote].author}
+        />
+        <article className="total-category">
+          <div className="total-card">
+            <p>
+              <span>
+                <img
+                  src="images/naira.png"
+                  alt="naira symbol"
+                  className="naira"
+                />
+                {total_Expense}
+              </span>{" "}
+              spent
+            </p>
+            <Link to="/expense">
+              <button>See List</button>
+            </Link>
+          </div>
+          <div className="line-place">
+            <div
+              className="line-chart"
+              style={{ background: Original_Gradient_color }}
+            />
+            <div className="line-color">
+              {percentage.map((category) => {
+                return (
+                  <Dash
+                    name={category.type}
+                    key={category.type}
+                    color={Category_colors}
+                    percentage={category.percenta}
                   />
-                  {total_Expense}
-                </span>{" "}
-                spent
-              </p>
-              <Link to="/expense">
-                <button>See List</button>
-              </Link>
-            </div>
-            <div className="line-place">
-              <div
-                className="line-chart"
-                style={{ background: Original_Gradient_color }}
-              />
-              <div className="line-color">
-                {percentage.map((category) => {
-                  return (
-                    <Dash
-                      name={category.type}
-                      key={category.type}
-                      color={Category_colors}
-                      percentage={category.percenta}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          </article>
-          <Expenses data={data} type="Latest Expense" seeall />
-          <div className="dash-top">
-            <h3>Top Categories</h3>
-            <div className="dash-top4">
-              {alimi.map((category, index) => {
-                return <Incategories {...category} key={index} />;
+                );
               })}
             </div>
           </div>
-        </>
-      )}
+        </article>
+        <Expenses data={data} type="Latest Expense" seeall />
+        <div className="dash-top">
+          <h3>Top Categories</h3>
+          <div className="dash-top4">
+            {alimi.map((category, index) => {
+              return <Incategories {...category} key={index} />;
+            })}
+          </div>
+        </div>
+      </>
     </section>
   );
 };

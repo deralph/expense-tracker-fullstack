@@ -9,7 +9,9 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background: transparent;
+  background: #9966ff;
+  /* opacity: 1; */
+  z-index: 100;
   transition: 1s;
 }
 nav ul {
@@ -21,12 +23,12 @@ nav ul li a {
   padding: 10px;
   cursor: pointer;
 }
-.nav_bg {
+/* .nav_bg {
   background: #9966ff;
   opacity: 1;
   z-index: 100;
   transition: 1s;
-}
+} */
 
 @media (min-width: 1800px) {
   nav ul li a {

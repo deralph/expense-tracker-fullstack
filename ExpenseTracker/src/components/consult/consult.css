@@ -109,7 +109,7 @@
   }
   .form {
     width: 250px;
-    height: 200px;
+    /* height: 200px; */
   }
   .consult-text {
     font-size: 25px;
@@ -123,7 +123,7 @@
   }
   .form {
     width: 200px;
-    height: 180px;
+    /* height: 180px; */
   }
   .consult-text {
     font-size: 20px;

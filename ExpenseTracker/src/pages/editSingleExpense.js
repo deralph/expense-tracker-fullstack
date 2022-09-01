@@ -13,16 +13,6 @@ const Edit = () => {
   const [problem, setProblem] = useState();
 
   const fetcher = useCallback(async () => {
-    // axios
-    //   .get(`expenses/${id}`)
-    //   .then((res) => setResult(res.data.expense))
-    //   .catch((err) => {
-    //     console.log(err);
-
-    //     if (err.response.status === 401) navigate("/signin");
-    //     setloading(false);
-    //     setProblem(true);
-    //   });
     try {
       console.log("finally in fetcher");
       const { data } = await axios.get(`expenses/${id}`);

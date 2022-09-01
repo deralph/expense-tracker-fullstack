@@ -6,25 +6,25 @@ import Logo from "../logo/Logo";
 
 const Navbar = () => {
   const { setSignIn } = useGlobal();
-  const [show, handleShow] = useState(false);
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
-        handleShow(true);
-      } else {
-        handleShow(false);
-      }
-    });
-  });
+  // const [show, handleShow] = useState(false);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", () => {
+  //     if (window.scrollY > 100) {
+  //       handleShow(true);
+  //     } else {
+  //       handleShow(false);
+  //     }
+  //   });
+  // });
   return (
-    <nav className={`nav ${show && "nav_bg"}`}>
-      <Logo show={show} />
+    <nav className="nav">
+      <Logo />
       <ul>
         <li>
           <Link
             to="/signin"
             onClick={() => setSignIn(true)}
-            style={{ color: `${show ? "white" : "#333"}` }}
+            style={{ color: "white" }}
           >
             Log in
           </Link>
@@ -34,7 +34,7 @@ const Navbar = () => {
           <Link
             to="/signin"
             onClick={() => setSignIn(false)}
-            style={{ color: `${show ? "white" : "#333"}` }}
+            style={{ color: "white" }}
           >
             Register
           </Link>

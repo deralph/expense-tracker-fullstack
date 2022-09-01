@@ -2,41 +2,17 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useGlobal } from "../context/Context";
 import Sidebar from "../dashboard/Sidebar/Sidebar";
 import Expenses from "./Expenses";
-import { sets, getMonth } from "../../extras/quotesDB";
+import { sets, getMonth } from "../../extras/functions";
 import "../categories/categories.css";
 import Back from "../../extras/Back";
-import Loader from "../loading/Loader";
 import { RiEqualizerLine } from "react-icons/ri";
-import useFetch from "../../extras/useFetch";
+// import useFetch from "../../extras/useFetch";
 import "../dashboard/dashboardbody/dashboardBody.css";
-import axios from "../../extras/axios";
-import { useNavigate } from "react-router-dom";
 
-const AllCategories = () => {
-  const navigate = useNavigate();
-  const [result, setResult] = useState([]);
-  const [loading, setloading] = useState(true);
-  const [problem, setProblem] = useState();
+import { reduceFunction } from "../../extras/functions";
 
-  const fetcher = useCallback(async () => {
-    try {
-      const { data } = await axios.get("expenses");
-      setResult(data.expenses);
-      console.log("in");
-    } catch (error) {
-      console.log(error);
-      if (error.response.status === 401) navigate("/signin");
-      setloading(false);
-      setProblem(true);
-    }
-  }, [navigate]);
-  useEffect(() => {
-    console.log("in useEffect");
-    setloading(true);
-    fetcher();
-    setloading(false);
-  }, [fetcher]);
-  const { sidebar, setSidebar, reduceFunction } = useGlobal();
+const AllCategories = ({ result }) => {
+  const { sidebar, setSidebar } = useGlobal();
   const [pro, setPro] = useState("");
 
   const [datas, setDatas] = useState(result);
@@ -74,44 +50,31 @@ const AllCategories = () => {
     }
   };
 
-  if (problem) {
-    return (
-      <h1 style={{ display: "grid", placeContent: "center", height: "100vh" }}>
-        SOMETHING WENT WRONG
-      </h1>
-    );
-  }
   return (
-    <div>
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <Back />
-          <RiEqualizerLine
-            className="dash-top1"
-            onClick={() => setSidebar(!sidebar)}
-            style={{ color: sidebar ? "#fff" : "#000" }}
-          />
-          <div className="dashboard">
-            {" "}
-            <Sidebar
-              category={options}
-              month={monthOptions}
-              pro={pro}
-              setPro={setPro}
-              handleCategory={handleCategory}
-              max={max}
-              handleMonth={handleMonth}
-            />
-            <div className={sidebar ? "all-side overflow" : "all-side"}>
-              <p className="total-p">Total : {reduceFunction(datas)}</p>
-              <Expenses data={datas} type=" Expenses" />{" "}
-            </div>
-          </div>
-        </>
-      )}
-    </div>
+    <>
+      <Back />
+      <RiEqualizerLine
+        className="dash-top1"
+        onClick={() => setSidebar(!sidebar)}
+        style={{ color: sidebar ? "#fff" : "#000" }}
+      />
+      <div className="dashboard">
+        {" "}
+        <Sidebar
+          category={options}
+          month={monthOptions}
+          pro={pro}
+          setPro={setPro}
+          handleCategory={handleCategory}
+          max={max}
+          handleMonth={handleMonth}
+        />
+        <div className={sidebar ? "all-side overflow" : "all-side"}>
+          <p className="total-p">Total : {reduceFunction(datas)}</p>
+          <Expenses data={datas} type=" Expenses" />{" "}
+        </div>
+      </div>
+    </>
   );
 };
 

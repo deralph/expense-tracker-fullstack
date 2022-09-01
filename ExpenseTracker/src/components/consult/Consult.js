@@ -2,9 +2,10 @@ import React, { useState, useRef } from "react";
 import "./consult.css";
 import emailjs from "@emailjs/browser";
 import { useNavigate } from "react-router-dom";
+import Back from "../../extras/Back";
 // import Back from "../../extras/Back";
 
-const Consult = ({ route }) => {
+const Consult = ({ back }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -50,6 +51,7 @@ const Consult = ({ route }) => {
 
   return (
     <section className="consult" id="contact">
+      {back && <Back />}
       {/* {route && <Back />} */}
       <h3>Consult Us</h3>
       <div className="consult-1">

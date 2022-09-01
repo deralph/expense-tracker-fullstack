@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const session = require("express-session");
 const connectDB = require("./connect/connectDB");
 const errorHandler = require("./middleware/errorHandle");
 const notFound = require("./middleware/notFound");
@@ -18,6 +19,21 @@ const {
   appLimiter,
   createAccountLimiter,
 } = require("./middleware/ratelimiter");
+
+app.set("trust proxy", 1);
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "Super Secret (change it)",
+    resave: true,
+    saveUninitialized: false,
+    cookie: {
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // must be 'none' to enable cross-site delivery
+      secure: process.env.NODE_ENV === "production", // must be true if sameSite='none'
+    },
+  })
+);
+
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -28,7 +44,6 @@ app.use(
   })
 );
 
-// app.set("trust proxy", 1);
 app.get("/ip", (request, response) => response.send(request.ip));
 app.use(appLimiter);
 app.use(express.json());

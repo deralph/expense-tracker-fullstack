@@ -1,5 +1,5 @@
 import React from "react";
-import { useIcons } from "../../extras/quotesDB";
+import useIcons from "../../extras/useicon";
 import { Link } from "react-router-dom";
 import "./expenses.css";
 
